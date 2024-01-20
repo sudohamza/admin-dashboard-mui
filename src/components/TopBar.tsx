@@ -1,27 +1,23 @@
-import {
-  Box,
-  IconButton,
-  Paper,
-  Stack,
-  Toolbar,
-  Badge,
-  Avatar,
-  MenuItem,
-  Typography,
-  Divider,
-  ListItemButton,
-  Popper,
-  ClickAwayListener,
-  Grow,
-  AppBar,
-} from "@mui/material";
 import React, { useContext } from "react";
-import { IoSearch } from "react-icons/io5";
-import { CiBarcode } from "react-icons/ci";
-import { IoNotifications } from "react-icons/io5";
-import { IoMdContacts } from "react-icons/io";
+import AppBar from "@mui/material/AppBar";
+import Grow from "@mui/material/Grow";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Popper from "@mui/material/Popper";
+import ListItemButton from "@mui/material/ListItemButton";
+import MenuItem from "@mui/material/MenuItem";
+import Avatar from "@mui/material/Avatar";
+import Badge from "@mui/material/Badge";
+import Paper from "@mui/material/Paper";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { IoSearch, IoNotifications } from "react-icons/io5";
+import { IoMdContacts, IoMdSettings } from "react-icons/io";
 import { MdOutlineLanguage } from "react-icons/md";
-import { IoMdSettings } from "react-icons/io";
+import { CiBarcode } from "react-icons/ci";
 import { UIContext } from "../context/ui";
 
 const styles = {

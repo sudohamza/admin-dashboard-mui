@@ -1,6 +1,7 @@
-import React, { useRef, useEffect, forwardRef } from "react";
-import { Drawer, Toolbar } from "@mui/material";
-import { Box } from "@mui/system";
+import React from "react";
+import Drawer from "@mui/material/Drawer";
+import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
 import NestedMenu from "./NestedMenu";
 import { sidebarItems } from "../data/sidebarMenu";
 
