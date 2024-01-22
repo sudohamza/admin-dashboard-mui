@@ -1,16 +1,16 @@
-import * as React from "react";
+import React from "react";
 import ListSubheader from "@mui/material/ListSubheader";
 import List from "@mui/material/List";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { SvgIconProps } from "@mui/material";
-import { NavLink, NavLinkProps } from "react-router-dom";
+import Stack from "@mui/material/Stack";
+import { NavLink, NavLinkProps, Link } from "react-router-dom";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import styled from "@emotion/styled";
 
 type ListItem = {
@@ -98,18 +98,18 @@ const NestedMenu: React.FC<NestedMenuProps> = ({ title, buttons, list }) => {
                 to={button.path}
                 key={button.name}
               >
-                <Box
-                  gap={2}
-                  sx={{
-                    fontSize: "24px",
-                    display: "flex",
-                  }}
+                <Stack
+                  fontSize={28}
+                  direction="row"
+                  gap={1}
+                  alignItems="center"
                 >
-                  <Box>{button.icon}</Box>
-                  <Box>
-                    <Typography sx={{ mt: 0.2 }}>{button.name}</Typography>
-                  </Box>
-                </Box>
+                  {button.icon}
+
+                  <Typography variant="subtitle1" fontWeight="bold" pt={0.5}>
+                    {button.name}
+                  </Typography>
+                </Stack>
               </ListItemButton>
             );
           })}
@@ -129,13 +129,36 @@ const NestedMenu: React.FC<NestedMenuProps> = ({ title, buttons, list }) => {
                   }}
                   onClick={handleListOpen}
                 >
-                  <ListItemIcon sx={{ fontSize: "30px", color: "inherit" }}>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.title} sx={{ ml: -2 }} />
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    gap={5}
+                    justifyContent="space-between"
+                  >
+                    <Stack
+                      width={100}
+                      fontSize={28}
+                      direction="row"
+                      gap={1}
+                      alignItems="center"
+                    >
+                      {item.icon}
 
-                  <Box sx={{ fontSize: "24px" }}>
-                    {listOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight="bold"
+                        pt={0.5}
+                      >
+                        {item.title}
+                      </Typography>
+                    </Stack>
+                    <Stack fontSize={32} pt={0.2}>
+                      {listOpen ? (
+                        <KeyboardArrowUpIcon fontSize="inherit" />
+                      ) : (
+                        <KeyboardArrowDownIcon fontSize="inherit" />
+                      )}
+                    </Stack>
                   </Box>
                 </ListItemButton>
 

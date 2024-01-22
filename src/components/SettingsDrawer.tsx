@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -8,13 +8,16 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { TbReload } from "react-icons/tb";
-import { IoMdClose } from "react-icons/io";
-import { MdSunny } from "react-icons/md";
-import { FaCloudMoon } from "react-icons/fa";
-import { IoContrastSharp, IoContrastOutline } from "react-icons/io5";
 import { CombinedThemeContext } from "../context/theme";
 import { UIContext } from "../context/ui";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import NightlightRoundIcon from "@mui/icons-material/NightlightRound";
+import ReplayIcon from "@mui/icons-material/Replay";
+import CloseIcon from "@mui/icons-material/Close";
+import ContrastIcon from "@mui/icons-material/Contrast";
+import CircleIcon from "@mui/icons-material/Circle";
+import { green, blue, purple, orange, red, pink } from "@mui/material/colors";
+import { Grid } from "@mui/material";
 
 const drawerWidth = 260;
 
@@ -40,7 +43,7 @@ const styles = {
     },
   },
   customButton: {
-    fontSize: "26px",
+    fontSize: 32,
     borderRadius: "10px",
     p: 4,
     color: "inherit",
@@ -50,6 +53,63 @@ const styles = {
     backgroundColor: "background.paper",
   },
   buttonNotActive: { color: "inherit", border: 0.5 },
+};
+
+const colors = [
+  { name: "green", color: green },
+  { name: "blue", color: blue },
+  { name: "purple", color: purple },
+  { name: "orange", color: orange },
+  { name: "red", color: red },
+  { name: "pink", color: pink },
+];
+type MuiColor = {
+  50: string;
+  100: string;
+  200: string;
+  300: string;
+  400: string;
+  500: string;
+  600: string;
+  700: string;
+  800: string;
+  900: string;
+  A100: string;
+  A200: string;
+  A400: string;
+  A700: string;
+};
+type PresetButtonProps = {
+  name: string;
+  color: MuiColor;
+};
+
+const PresetButton: React.FC<PresetButtonProps> = ({ name, color }) => {
+  const themeControls = useContext(CombinedThemeContext);
+  const defaultColor = themeControls.getThemeMode("themeColor");
+
+  const handleChangeColor = () => {
+    themeControls.changeColor(name, color);
+  };
+  return (
+    <Box
+      borderRadius="10px"
+      sx={
+        `${defaultColor}` === name
+          ? {
+              backgroundColor: color[50],
+            }
+          : { ...styles.buttonNotActive }
+      }
+    >
+      <Button
+        onClick={handleChangeColor}
+        sx={{ fontSize: 24, borderRadius: "10px", p: 2, color: color[400] }}
+      >
+        <CircleIcon fontSize="inherit" />
+      </Button>
+    </Box>
+  );
 };
 
 const Header = () => {
@@ -69,13 +129,13 @@ const Header = () => {
         </Box>
         <Box gap={2}>
           <IconButton color="inherit">
-            <TbReload />
+            <ReplayIcon />
           </IconButton>
           <IconButton
             onClick={() => dispatch({ type: "CLOSE_SETTING_BAR" })}
             color="inherit"
           >
-            <IoMdClose />
+            <CloseIcon />
           </IconButton>
         </Box>
       </Stack>
@@ -122,7 +182,7 @@ const drawerContent = () => {
               onClick={() => themeControls.setThemeMode("light")}
               sx={styles.customButton}
             >
-              <MdSunny />
+              <LightModeIcon fontSize="inherit" />
             </Button>
           </Box>
           <Box
@@ -139,7 +199,7 @@ const drawerContent = () => {
               onClick={() => themeControls.setThemeMode("dark")}
               sx={styles.customButton}
             >
-              <FaCloudMoon />
+              <NightlightRoundIcon fontSize="inherit" />
             </Button>
           </Box>
         </Stack>
@@ -172,7 +232,7 @@ const drawerContent = () => {
               onClick={() => themeControls.toggleContrast("normal")}
               sx={styles.customButton}
             >
-              <IoContrastOutline />
+              <ContrastIcon fontSize="inherit" />
             </Button>
           </Box>
           <Box
@@ -189,10 +249,32 @@ const drawerContent = () => {
               onClick={() => themeControls.toggleContrast("high")}
               sx={styles.customButton}
             >
-              <IoContrastSharp />
+              <ContrastIcon sx={{ rotate: "180deg" }} fontSize="inherit" />
             </Button>
           </Box>
         </Stack>
+      </Box>
+      {/* Color Presets */}
+      <Box py={1} px={2}>
+        <ListSubheader
+          sx={{
+            "&:hover": { cursor: "pointer" },
+            backgroundColor: "background.default",
+            userSelect: "none",
+          }}
+        >
+          <Typography color="text.primary" variant="caption">
+            Color Presets
+          </Typography>
+        </ListSubheader>
+
+        <Grid ml={1} gap={1} container>
+          {colors.map((item, index) => (
+            <Grid item key={index}>
+              <PresetButton {...item} />
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </>
   );

@@ -14,10 +14,12 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { IoSearch, IoNotifications } from "react-icons/io5";
-import { IoMdContacts, IoMdSettings } from "react-icons/io";
-import { MdOutlineLanguage } from "react-icons/md";
-import { CiBarcode } from "react-icons/ci";
+import SearchIcon from "@mui/icons-material/Search";
+import QrCodeIcon from "@mui/icons-material/QrCode";
+import LanguageIcon from "@mui/icons-material/Language";
+import SettingsIcon from "@mui/icons-material/Settings";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import { UIContext } from "../context/ui";
 
 const styles = {
@@ -77,7 +79,6 @@ const UserProfileMenu = () => {
             zIndex: 1105,
           }}
           anchorEl={anchorElUser}
-          // keepMounted
           open={Boolean(anchorElUser)}
         >
           <Grow
@@ -144,15 +145,15 @@ const TopBar = () => {
             justifyContent="space-between"
           >
             <Toolbar>
-              <Stack gap={1} direction="row" alignItems="center">
+              <Stack fontSize={28} gap={1} direction="row" alignItems="center">
                 <IconButton color="inherit">
-                  <IoSearch />
+                  <SearchIcon fontSize="inherit" />
                 </IconButton>
                 <Paper
                   variant="outlined"
-                  sx={{ fontSize: "20px", py: 0.5, px: 1 }}
+                  sx={{ display: "flex", px: 1, py: 0.5 }}
                 >
-                  <CiBarcode />
+                  <QrCodeIcon />
                 </Paper>
               </Stack>
             </Toolbar>
@@ -161,21 +162,21 @@ const TopBar = () => {
               <Stack gap={2} direction="row" alignItems="center">
                 <Box gap={2}>
                   <IconButton color="inherit">
-                    <MdOutlineLanguage />
+                    <LanguageIcon />
                   </IconButton>
                   <IconButton color="inherit">
                     <Badge badgeContent={4} color="error">
-                      <IoNotifications />
+                      <NotificationsIcon />
                     </Badge>
                   </IconButton>
                   <IconButton color="inherit">
-                    <IoMdContacts />
+                    <PeopleAltIcon />
                   </IconButton>
                   <IconButton
                     onClick={() => dispatch({ type: "OPEN_SETTING_BAR" })}
                     color="inherit"
                   >
-                    <IoMdSettings />
+                    <SettingsIcon />
                   </IconButton>
                 </Box>
                 {/************  User menu and Avatar **************/}

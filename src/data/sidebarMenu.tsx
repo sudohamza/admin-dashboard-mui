@@ -1,11 +1,10 @@
-import { IoHome } from "react-icons/io5";
-import { GiGymBag } from "react-icons/gi";
-import { SiGoogleanalytics } from "react-icons/si";
-import { MdAccountCircle } from "react-icons/md";
-import { MdOutlineProductionQuantityLimits } from "react-icons/md";
-import { SiPagekit } from "react-icons/si";
-
 import React from "react";
+import HouseIcon from "@mui/icons-material/House";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import BarChartIcon from "@mui/icons-material/BarChart";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import CategoryIcon from "@mui/icons-material/Category";
 
 export const sidebarItems = [
   {
@@ -15,14 +14,18 @@ export const sidebarItems = [
       {
         name: "Dashboard",
         path: "/",
-        icon: <IoHome />,
+        icon: <HouseIcon fontSize="inherit" />,
       },
       {
         name: "E-Commerce",
         path: "/commerce",
-        icon: <GiGymBag />,
+        icon: <ShoppingBagIcon fontSize="inherit" />,
       },
-      { name: "Analytics", path: "analytics", icon: <SiGoogleanalytics /> },
+      {
+        name: "Analytics",
+        path: "analytics",
+        icon: <BarChartIcon fontSize="inherit" />,
+      },
     ],
   },
   {
@@ -31,7 +34,7 @@ export const sidebarItems = [
     list: [
       {
         title: "User",
-        icon: <MdAccountCircle />,
+        icon: <AccountCircleIcon fontSize="inherit" />,
         path: "/user",
         listItems: [
           { name: "Profile", path: "user/profile" },
@@ -47,11 +50,17 @@ export const sidebarItems = [
   {
     id: 3,
     title: "Other Cases",
-    buttons: [{ name: "Blank", path: "/blank", icon: <SiPagekit /> }],
+    buttons: [
+      {
+        name: "Blank",
+        path: "/blank",
+        icon: <FileCopyIcon fontSize="inherit" />,
+      },
+    ],
     list: [
       {
         title: "Product",
-        icon: <MdOutlineProductionQuantityLimits />,
+        icon: <CategoryIcon fontSize="inherit" />,
         path: "product",
         listItems: [
           { name: "List", path: "product/list" },

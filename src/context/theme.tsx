@@ -24,13 +24,13 @@ export const themeSettings = (
           },
         },
       },
-      MuiSvgIcon: {
-        styleOverrides: {
-          root: {
-            color: "#919EAB",
-          },
-        },
-      },
+      // MuiSvgIcon: {
+      //   styleOverrides: {
+      //     root: {
+      //       color: "#919EAB",
+      //     },
+      //   },
+      // },
       MuiAppBar: {
         styleOverrides: {
           colorPrimary: {
@@ -97,12 +97,13 @@ export const themeSettings = (
 export const CombinedThemeContext = createContext({
   setThemeMode: (mode: PaletteMode) => {},
   toggleContrast: (mode: Contrast) => {},
-  changeColor: (color: InputColor) => {},
+  changeColor: (name: string, color: InputColor) => {},
   getThemeMode: (modeType: string) => {},
 });
 
 type Contrast = "normal" | "high";
 type Color = {
+  name: string;
   main: string;
   dark: string;
   darkActive: string;
@@ -132,6 +133,7 @@ export const useMode = () => {
   const [mode, setMode] = useState<PaletteMode>("light");
   const [contrast, setContrast] = useState<Contrast>("normal");
   const [color, setColor] = useState<Color>({
+    name: "blue",
     main: blue[700],
     dark: blue[800],
     darkActive: blue[900] + "20",
@@ -150,13 +152,16 @@ export const useMode = () => {
           return mode === "light" ? "light" : "dark";
         } else if (modeType === "contrast") {
           return contrast === "normal" ? "normal" : "high";
+        } else if (modeType === "themeColor") {
+          return color.name && `${color.name}`;
         }
       },
       toggleContrast: (mode: Contrast) => {
         setContrast(mode);
       },
-      changeColor: (color: InputColor) => {
+      changeColor: (name: string, color: InputColor) => {
         setColor({
+          name: name,
           main: color[700],
           dark: color[800],
           darkActive: color[900] + "20",

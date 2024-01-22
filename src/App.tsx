@@ -1,11 +1,12 @@
-import React from "react";
+import React, { lazy, useEffect } from "react";
 import { CombinedThemeContext, useMode } from "./context/theme";
-import { ThemeProvider, CssBaseline, Box } from "@mui/material";
+import { ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
-import Main from "./Main";
 import { UIProvider } from "./context/ui";
-
+const LazyMain = lazy(() => import("./Main"));
 const App = () => {
   const [theme, themeControls] = useMode();
 
@@ -18,7 +19,7 @@ const App = () => {
               <CssBaseline />
               <Routes>
                 <Route Component={ProtectedRoutes}>
-                  <Route path="/*" Component={Main}></Route>
+                  <Route path="/*" Component={LazyMain}></Route>
                 </Route>
                 <Route path="/login" element={<Box>Login</Box>} />
                 <Route path="/register" element={<Box>Register</Box>} />
