@@ -15,8 +15,8 @@ const App = () => {
             <Route Component={ProtectedRoutes}>
               <Route path="/*" Component={Main}></Route>
             </Route>
-            <Route path="/login" Component={LazyLogin} />
-            <Route path="/register" element={<Box>Register</Box>} />
+            <Route path="login" Component={LazyLogin} />
+            <Route path="register" element={<Box>Register</Box>} />
           </Routes>
         </UIProvider>
       </Router>
