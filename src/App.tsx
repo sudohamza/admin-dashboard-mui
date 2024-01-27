@@ -1,32 +1,24 @@
-import React, { lazy, useEffect } from "react";
-import { CombinedThemeContext, useMode } from "./context/theme";
-import { ThemeProvider } from "@mui/material";
-import CssBaseline from "@mui/material/CssBaseline";
+import React, { lazy, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { UIProvider } from "./context/ui";
-const LazyMain = lazy(() => import("./Main"));
-const App = () => {
-  const [theme, themeControls] = useMode();
+import Main from "./Main";
 
+const LazyLogin = lazy(() => import("./pages/Login"));
+const App = () => {
   return (
     <>
       <Router>
-        <ThemeProvider theme={theme}>
-          <CombinedThemeContext.Provider value={{ ...themeControls }}>
-            <UIProvider>
-              <CssBaseline />
-              <Routes>
-                <Route Component={ProtectedRoutes}>
-                  <Route path="/*" Component={LazyMain}></Route>
-                </Route>
-                <Route path="/login" element={<Box>Login</Box>} />
-                <Route path="/register" element={<Box>Register</Box>} />
-              </Routes>
-            </UIProvider>
-          </CombinedThemeContext.Provider>
-        </ThemeProvider>
+        <UIProvider>
+          <Routes>
+            <Route Component={ProtectedRoutes}>
+              <Route path="/*" Component={Main}></Route>
+            </Route>
+            <Route path="/login" Component={LazyLogin} />
+            <Route path="/register" element={<Box>Register</Box>} />
+          </Routes>
+        </UIProvider>
       </Router>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -8,7 +8,6 @@ import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import { CombinedThemeContext } from "../context/theme";
 import { UIContext } from "../context/ui";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import NightlightRoundIcon from "@mui/icons-material/NightlightRound";
@@ -16,9 +15,18 @@ import ReplayIcon from "@mui/icons-material/Replay";
 import CloseIcon from "@mui/icons-material/Close";
 import ContrastIcon from "@mui/icons-material/Contrast";
 import CircleIcon from "@mui/icons-material/Circle";
-import { green, blue, purple, orange, red, pink } from "@mui/material/colors";
-import { Grid } from "@mui/material";
-
+import { Grid, useTheme } from "@mui/material";
+import { PresetButtonProps } from "../utils/types";
+import { CustomThemeContext } from "../theme/theme";
+import {
+  blue,
+  deepOrange,
+  green,
+  purple,
+  red,
+  teal,
+} from "@mui/material/colors";
+import { MuiThemeColor, ThemeName } from "../utils/types";
 const drawerWidth = 260;
 
 const styles = {
@@ -49,62 +57,53 @@ const styles = {
     color: "inherit",
   },
   buttonActive: {
-    color: "secondary.light",
+    color: "primary.main",
     backgroundColor: "background.paper",
   },
   buttonNotActive: { color: "inherit", border: 0.5 },
 };
 
-const colors = [
-  { name: "green", color: green },
-  { name: "blue", color: blue },
-  { name: "purple", color: purple },
-  { name: "orange", color: orange },
-  { name: "red", color: red },
-  { name: "pink", color: pink },
+type Colors = {
+  name: ThemeName;
+  color: MuiThemeColor;
+};
+const colors: Colors[] = [
+  { name: "BLUE", color: blue },
+  { name: "GREEN", color: green },
+  { name: "PURPLE", color: purple },
+  { name: "YELLOW", color: deepOrange },
+  { name: "RED", color: red },
+  { name: "TEAL", color: teal },
 ];
-type MuiColor = {
-  50: string;
-  100: string;
-  200: string;
-  300: string;
-  400: string;
-  500: string;
-  600: string;
-  700: string;
-  800: string;
-  900: string;
-  A100: string;
-  A200: string;
-  A400: string;
-  A700: string;
-};
-type PresetButtonProps = {
-  name: string;
-  color: MuiColor;
-};
 
 const PresetButton: React.FC<PresetButtonProps> = ({ name, color }) => {
-  const themeControls = useContext(CombinedThemeContext);
-  const defaultColor = themeControls.getThemeMode("themeColor");
-
-  const handleChangeColor = () => {
-    themeControls.changeColor(name, color);
+  const themeControls = useContext(CustomThemeContext);
+  const activeTheme = themeControls.getThemeName();
+  const handleClick = () => {
+    themeControls.setThemeColor(name);
   };
   return (
     <Box
       borderRadius="10px"
       sx={
-        `${defaultColor}` === name
+        `${activeTheme}` === name
           ? {
-              backgroundColor: color[50],
+              backgroundColor: "secondary.light",
+              mt: 0.1,
             }
           : { ...styles.buttonNotActive }
       }
     >
       <Button
-        onClick={handleChangeColor}
-        sx={{ fontSize: 24, borderRadius: "10px", p: 2, color: color[400] }}
+        onClick={handleClick}
+        sx={{
+          transition: "all 0.4s ease",
+          fontSize: `${activeTheme}` === name ? 32 : 20,
+          borderRadius: "10px",
+          width: "60px",
+          height: "60px",
+          color: color[400],
+        }}
       >
         <CircleIcon fontSize="inherit" />
       </Button>
@@ -144,9 +143,8 @@ const Header = () => {
 };
 
 const drawerContent = () => {
-  const themeControls = useContext(CombinedThemeContext);
-  const themeMode = themeControls.getThemeMode("theme");
-  const themeContrast = themeControls.getThemeMode("contrast");
+  const themeControls = useContext(CustomThemeContext);
+  const theme = useTheme();
   return (
     <>
       {/* Header */}
@@ -169,36 +167,32 @@ const drawerContent = () => {
         </ListSubheader>
         <Stack justifyContent="space-around" direction="row">
           <Box
+            onClick={() => themeControls.setThemeMode("light")}
             borderRadius="10px"
             sx={
-              `${themeMode}` === "light"
+              `${theme.palette.mode}` === "light"
                 ? {
                     ...styles.buttonActive,
                   }
                 : { ...styles.buttonNotActive }
             }
           >
-            <Button
-              onClick={() => themeControls.setThemeMode("light")}
-              sx={styles.customButton}
-            >
+            <Button sx={styles.customButton}>
               <LightModeIcon fontSize="inherit" />
             </Button>
           </Box>
           <Box
+            onClick={() => themeControls.setThemeMode("dark")}
             borderRadius="10px"
             sx={
-              `${themeMode}` === "dark"
+              `${theme.palette.mode}` === "dark"
                 ? {
                     ...styles.buttonActive,
                   }
                 : { ...styles.buttonNotActive }
             }
           >
-            <Button
-              onClick={() => themeControls.setThemeMode("dark")}
-              sx={styles.customButton}
-            >
+            <Button sx={styles.customButton}>
               <NightlightRoundIcon fontSize="inherit" />
             </Button>
           </Box>
@@ -221,7 +215,7 @@ const drawerContent = () => {
           <Box
             borderRadius="10px"
             sx={
-              `${themeContrast}` === "normal"
+              `${themeControls.getThemeContrast()}` === "NORMAL"
                 ? {
                     ...styles.buttonActive,
                   }
@@ -229,7 +223,7 @@ const drawerContent = () => {
             }
           >
             <Button
-              onClick={() => themeControls.toggleContrast("normal")}
+              onClick={() => themeControls.setThemeContrast("NORMAL")}
               sx={styles.customButton}
             >
               <ContrastIcon fontSize="inherit" />
@@ -238,7 +232,7 @@ const drawerContent = () => {
           <Box
             borderRadius="10px"
             sx={
-              `${themeContrast}` === "high"
+              `${themeControls.getThemeContrast()}` === "HIGH"
                 ? {
                     ...styles.buttonActive,
                   }
@@ -246,7 +240,7 @@ const drawerContent = () => {
             }
           >
             <Button
-              onClick={() => themeControls.toggleContrast("high")}
+              onClick={() => themeControls.setThemeContrast("HIGH")}
               sx={styles.customButton}
             >
               <ContrastIcon sx={{ rotate: "180deg" }} fontSize="inherit" />
@@ -269,11 +263,13 @@ const drawerContent = () => {
         </ListSubheader>
 
         <Grid ml={1} gap={1} container>
-          {colors.map((item, index) => (
-            <Grid item key={index}>
-              <PresetButton {...item} />
-            </Grid>
-          ))}
+          {colors.map((item, index) => {
+            return (
+              <Grid item key={index}>
+                <PresetButton {...item} />
+              </Grid>
+            );
+          })}
         </Grid>
       </Box>
     </>

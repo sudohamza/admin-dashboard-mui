@@ -8,11 +8,13 @@ import SettingsDrawer from "./components/SettingsDrawer";
 
 const styles = {
   main: {
+    height: "100%",
     pl: { lg: "260px" },
+    backgroundColor: "background.default",
   },
   contentContainer: {
     px: 5,
-    pt: 10,
+    py: 10,
   },
 };
 

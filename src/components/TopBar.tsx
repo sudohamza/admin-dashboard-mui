@@ -20,6 +20,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import MenuIcon from "@mui/icons-material/Menu";
 import { UIContext } from "../context/ui";
 
 const styles = {
@@ -125,27 +126,30 @@ const UserProfileMenu = () => {
 
 const TopBar = () => {
   const { dispatch, state } = useContext(UIContext);
-
   return (
-    <AppBar
-      elevation={0}
-      sx={{ pl: { lg: "260px" }, color: "inherit" }}
-      position="fixed"
-    >
+    <AppBar elevation={0} sx={{ pl: { lg: "260px" } }} position="fixed">
       <Box>
         <Stack sx={styles.overlay}>
           <Toolbar />
         </Stack>
         {/* App Bar */}
-        <Box color="inherit">
+        <Box>
           {/* Search Bar Container */}
           <Stack
+            color="text.primary"
             px={{ sm: 1, lg: 4 }}
             direction="row"
             justifyContent="space-between"
           >
             <Toolbar>
               <Stack fontSize={28} gap={1} direction="row" alignItems="center">
+                <IconButton
+                  color="inherit"
+                  onClick={() => dispatch({ type: "OPEN_SIDE_BAR" })}
+                  sx={{ display: { sm: "", lg: "none" } }}
+                >
+                  <MenuIcon fontSize="inherit" />
+                </IconButton>
                 <IconButton color="inherit">
                   <SearchIcon fontSize="inherit" />
                 </IconButton>

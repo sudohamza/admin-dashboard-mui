@@ -6,37 +6,12 @@ import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import Typography from "@mui/material/Typography";
 import Collapse from "@mui/material/Collapse";
-import { SvgIconProps } from "@mui/material";
+import { NestedMenuProps } from "../utils/types";
 import Stack from "@mui/material/Stack";
 import { NavLink, NavLinkProps, Link } from "react-router-dom";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import styled from "@emotion/styled";
-
-type ListItem = {
-  name: string;
-  path: string;
-};
-
-type List = {
-  title: string;
-  icon: string | React.ReactElement<SvgIconProps>;
-  path: string;
-  listItems?: ListItem[];
-};
-
-type Button = {
-  name: string;
-  path: string;
-  icon: string | React.ReactElement<SvgIconProps>;
-};
-
-type NestedMenuProps = {
-  id: number;
-  title: string;
-  buttons?: Button[];
-  list?: List[];
-};
 
 const NestedMenu: React.FC<NestedMenuProps> = ({ title, buttons, list }) => {
   const [open, setOpen] = React.useState(true);
@@ -90,8 +65,8 @@ const NestedMenu: React.FC<NestedMenuProps> = ({ title, buttons, list }) => {
                 sx={{
                   my: 1,
                   "&.active": {
-                    color: "secondary.light",
-                    backgroundColor: "primary.light",
+                    color: "primary.light",
+                    backgroundColor: "secondary.light",
                   },
                 }}
                 component={NavLink}
@@ -123,8 +98,8 @@ const NestedMenu: React.FC<NestedMenuProps> = ({ title, buttons, list }) => {
                   sx={{
                     color: `${listOpen ? "text.secondary" : ""}`,
                     "&.active": {
-                      color: "secondary.light",
-                      backgroundColor: "primary.light",
+                      color: "primary.light",
+                      backgroundColor: "secondary.light",
                     },
                   }}
                   onClick={handleListOpen}
@@ -180,7 +155,7 @@ const NestedMenu: React.FC<NestedMenuProps> = ({ title, buttons, list }) => {
                             pl: 4,
                             my: 1,
                             "&.active": {
-                              color: "secondary.light",
+                              color: "primary.main",
                             },
                           }}
                           component={NavLink}
