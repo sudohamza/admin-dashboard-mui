@@ -18,7 +18,7 @@ export const sidebarItems = [
       },
       {
         name: "E-Commerce",
-        path: "/commerce",
+        path: "commerce",
         icon: <ShoppingBagIcon fontSize="inherit" />,
       },
       {
@@ -53,7 +53,7 @@ export const sidebarItems = [
     buttons: [
       {
         name: "Blank",
-        path: "/blank",
+        path: "blank",
         icon: <FileCopyIcon fontSize="inherit" />,
       },
     ],
@@ -61,7 +61,7 @@ export const sidebarItems = [
       {
         title: "Product",
         icon: <CategoryIcon fontSize="inherit" />,
-        path: "product",
+        path: "/product",
         listItems: [
           { name: "List", path: "product/list" },
           { name: "Details", path: "product/details/:id" },
