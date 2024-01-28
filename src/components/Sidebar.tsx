@@ -40,7 +40,7 @@ const drawer = () => {
       <Box>
         <Toolbar>
           <Stack direction="row" alignItems="center">
-            <Box mt={0.6}>
+            <Box py={2} mt={0.6}>
               <svg width="55px" height="55px" viewBox="0 0 24 24" version="1.1">
                 <g
                   stroke="none"
