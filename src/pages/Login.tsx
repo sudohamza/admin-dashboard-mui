@@ -2,16 +2,13 @@ import React from "react";
 import Box from "@mui/material/Box";
 import { Suspense } from "react";
 import Grid from "@mui/material/Grid";
-import {
-  Button,
-  Paper,
-  SvgIcon,
-  Theme,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { Paper, Toolbar, Typography } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
+import { FaReact } from "@react-icons/all-files/fa/FaReact";
+import { SiMaterialUi } from "@react-icons/all-files/si/SiMaterialUi";
+import { SiTypescript } from "@react-icons/all-files/si/SiTypescript";
+import { SiWebpack } from "@react-icons/all-files/si/SiWebpack";
 
 const styles = {
   main: {
@@ -27,9 +24,9 @@ const Login = () => {
       <Box sx={styles.main}>
         <Grid container>
           <Grid item lg={9}>
-            <Box height="100%">
+            <Box>
               <Toolbar>
-                <Stack direction="row" alignItems="center">
+                <Stack py={2} direction="row" alignItems="center">
                   <Box mt={0.5}>
                     <svg
                       width="55px"
@@ -59,7 +56,7 @@ const Login = () => {
                             ></path>
                             <path
                               d="M10.75,2.56687 C11.5235,2.12029 12.4765,2.12029 13.25,2.56687 L19.5443,6.20084 C20.3178,6.64743 20.7943,7.47274 20.7943,8.36591 L20.7943,15.6339 C20.7943,16.527 20.3178,17.3523 19.5443,17.7989 L13.25,21.4329 C12.4765,21.8795 11.5235,21.8795 10.75,21.4329 L4.45581,17.7989 C3.68231,17.3523 3.20581,16.527 3.20581,15.6339 L3.20581,8.36591 C3.20581,7.47274 3.68231,6.64743 4.45581,6.20084 L10.75,2.56687 Z"
-                              fill={theme.palette.primary.main}
+                              fill={theme.palette.primary.light}
                             ></path>
                           </g>
                         </g>
@@ -69,7 +66,7 @@ const Login = () => {
                         fontWeight="bold"
                         x="7"
                         y="16"
-                        fill={theme.palette.primary.contrastText}
+                        fill={theme.palette.background.default}
                       >
                         H
                       </text>
@@ -79,20 +76,39 @@ const Login = () => {
                     <Typography
                       variant="button"
                       fontWeight="bold"
-                      color={theme.palette.primary.main}
+                      color={theme.palette.primary.light}
                       fontSize={24}
                     >
-                      Ali
+                      amza ali
                     </Typography>
                   </Box>
                 </Stack>
               </Toolbar>
+              <Box color="primary.contrastText" textAlign="center">
+                <Typography variant="h4" fontWeight="bold">
+                  Hi, Welcome back
+                </Typography>
+              </Box>
             </Box>
+            <Box py={4} textAlign="center">
+              <img src="./assets/login-picture.png" />
+            </Box>
+
+            <Stack
+              alignItems="center"
+              fontSize={50}
+              justifyContent="center"
+              direction="row"
+              gap={4}
+            >
+              <FaReact />
+              <SiMaterialUi />
+              <SiTypescript />
+              <SiWebpack />
+            </Stack>
           </Grid>
           <Grid item lg={3}>
-            <Paper sx={{ height: "100%" }} elevation={0}>
-              <Button onClick={() => {}}>Change</Button>
-            </Paper>
+            <Paper sx={{ height: "100%" }} elevation={0}></Paper>
           </Grid>
         </Grid>
       </Box>
