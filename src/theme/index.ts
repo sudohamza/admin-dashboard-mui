@@ -86,21 +86,19 @@ export const generateTheme = (
             primary: palette.augmentColor({
               color: {
                 main: ThemeColor[400],
-                contrastText: "#ffffff",
               },
             }),
             secondary: palette.augmentColor({
               color: {
                 main: ThemeColor[300] + "50",
-                contrastText: "#ffffff",
               },
             }),
             text: {
-              primary: contrast === "NORMAL" ? "#919eab" : "#6c767f",
+              primary: contrast === "NORMAL" ? "#919eab" : "#737373",
               secondary: "#4d4d4d",
             },
             background: {
-              default: contrast === "NORMAL" ? "#f4f6f8" : "#DBDEE0",
+              default: contrast === "NORMAL" ? "#f4f6f8" : "#f1f2f3",
               paper: "#ffffff",
             },
           }),
