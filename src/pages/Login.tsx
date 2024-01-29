@@ -131,10 +131,9 @@ const Login = () => {
             <Box
               sx={{ width: { md: "450px", lg: "800px" } }}
               component="img"
-              // sx={{ width: { sm: "none", md: "50", lg: "10%" } }}
               py={4}
               textAlign="center"
-              src="./assets/login-picture.png"
+              src="assets/login-picture.png"
             ></Box>
           </Box>
 

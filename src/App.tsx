@@ -1,6 +1,6 @@
 import React, { lazy, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { UIProvider } from "./context/ui";
 import Main from "./Main";
