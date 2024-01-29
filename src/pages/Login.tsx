@@ -81,7 +81,7 @@ const Login = () => {
               component="img"
               py={4}
               textAlign="center"
-              src="login-picture.png"
+              src="https://minimals.cc/assets/illustrations/illustration_dashboard.png"
             ></Box>
           </Box>
 
