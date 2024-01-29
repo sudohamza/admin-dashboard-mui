@@ -55,6 +55,7 @@ const styles = {
 };
 
 const UserProfileMenu = () => {
+  const { dispatch } = useContext(UIContext);
   const settings = ["Home", "Profile", "Settings"];
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
@@ -112,7 +113,10 @@ const UserProfileMenu = () => {
                   </MenuItem>
                 ))}
                 <Divider />
-                <ListItemButton sx={{ mx: 1 }}>
+                <ListItemButton
+                  onClick={() => dispatch({ type: "LOGGED_OUT" })}
+                  sx={{ mx: 1 }}
+                >
                   <Typography color="error">Log out</Typography>
                 </ListItemButton>
               </Paper>
