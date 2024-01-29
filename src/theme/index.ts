@@ -66,6 +66,7 @@ export const generateTheme = (
             primary: palette.augmentColor({
               color: {
                 main: ThemeColor[400],
+                contrastText: "#212b36",
               },
             }),
             secondary: palette.augmentColor({
@@ -86,6 +87,7 @@ export const generateTheme = (
             primary: palette.augmentColor({
               color: {
                 main: ThemeColor[400],
+                contrastText: "#212b36",
               },
             }),
             secondary: palette.augmentColor({

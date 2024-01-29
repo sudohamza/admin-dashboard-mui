@@ -5,6 +5,7 @@ import Box from "@mui/material/Box";
 import Sidebar from "./components/Sidebar";
 import TopBar from "./components/TopBar";
 import SettingsDrawer from "./components/SettingsDrawer";
+import LinearLoading from "./components/LinearLoading";
 
 const styles = {
   main: {
@@ -21,58 +22,14 @@ const styles = {
 const Main = () => {
   return (
     <>
-      <Sidebar />
-      <SettingsDrawer />
-      <TopBar />
-      <Suspense fallback={"loading"}>
+      <Suspense fallback={<LinearLoading />}>
+        <Sidebar />
+        <SettingsDrawer />
+        <TopBar />
         <Box sx={styles.main}>
           <Box sx={styles.contentContainer}>
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <Box gap={4}>
-                    <Paper
-                      elevation={0}
-                      sx={{
-                        width: "100%",
-                        height: "250px",
-                        my: "15px",
-                      }}
-                    ></Paper>
-                    <Paper
-                      sx={{
-                        width: "100%",
-                        height: "250px",
-                        my: "15px",
-                        backgroundColor: "green",
-                      }}
-                    ></Paper>
-                    <Paper
-                      sx={{
-                        width: "100%",
-                        height: "250px",
-                        my: "15px",
-                      }}
-                    ></Paper>
-                    <Paper
-                      sx={{
-                        width: "100%",
-                        height: "250px",
-                        my: "15px",
-                        backgroundColor: "purple",
-                      }}
-                    ></Paper>
-                    <Paper
-                      sx={{
-                        width: "100%",
-                        height: "250px",
-                        my: "15px",
-                      }}
-                    ></Paper>
-                  </Box>
-                }
-              />
+              <Route path="/" element={<Box gap={4}></Box>} />
               <Route path="*" element={<Box>404 Page Not Found</Box>} />
             </Routes>
           </Box>

@@ -1,23 +1,35 @@
-import React, { lazy, useContext, useEffect } from "react";
-import Box from "@mui/material/Box";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import React, { Suspense, lazy, useContext, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { UIProvider } from "./context/ui";
-import Main from "./Main";
+import LinearLoading from "./components/LinearLoading";
 
-const LazyLogin = lazy(() => import("./pages/Login"));
+const LazyMain = lazy(async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return import("./Main");
+});
+const LazyLogin = lazy(async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return import("./pages/Login");
+});
+const LazyRegister = lazy(async () => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+  return import("./pages/Register");
+});
 const App = () => {
   return (
     <>
       <Router>
         <UIProvider>
-          <Routes>
-            <Route Component={ProtectedRoutes}>
-              <Route path="/*" Component={Main}></Route>
-            </Route>
-            <Route path="login" Component={LazyLogin} />
-            <Route path="register" element={<Box>Register</Box>} />
-          </Routes>
+          <Suspense fallback={<LinearLoading />}>
+            <Routes>
+              <Route Component={ProtectedRoutes}>
+                <Route path="/*" Component={LazyMain}></Route>
+              </Route>
+              <Route path="login" Component={LazyLogin} />
+              <Route path="register" Component={LazyRegister} />
+            </Routes>
+          </Suspense>
         </UIProvider>
       </Router>
     </>

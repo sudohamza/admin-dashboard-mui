@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import { Suspense } from "react";
+import Grid from "@mui/material/Grid";
 import {
   Paper,
   Toolbar,
@@ -13,24 +14,23 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { useTheme } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { useTheme, FormLabel, FormGroup, FormHelperText } from "@mui/material";
 import { Stack } from "@mui/system";
 import { FaReact } from "@react-icons/all-files/fa/FaReact";
 import { SiMaterialUi } from "@react-icons/all-files/si/SiMaterialUi";
 import { SiTypescript } from "@react-icons/all-files/si/SiTypescript";
 import { SiWebpack } from "@react-icons/all-files/si/SiWebpack";
-import InfoIcon from "@mui/icons-material/Info";
 import { RiEyeCloseLine } from "@react-icons/all-files/ri/RiEyeCloseLine";
 import { RiEyeLine } from "@react-icons/all-files/ri/RiEyeLine";
 import { UIContext } from "../context/ui";
 import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import LinearLoading from "../components/LinearLoading";
 
 let email = "demo@example.com";
 let password = "demo1234";
 
-const Login = () => {
+const Register = () => {
   const { dispatch } = useContext(UIContext);
   const [formData, setFormData] = useState({
     email: "",
@@ -117,7 +117,10 @@ const Login = () => {
             </Toolbar>
             <Box color="text.secondary" textAlign="center">
               <Typography variant="h4" fontWeight="bold">
-                Hi, Welcome back
+                Manage the job more
+              </Typography>
+              <Typography variant="h4" fontWeight="bold">
+                effectively with Minimal
               </Typography>
             </Box>
           </Box>
@@ -133,7 +136,7 @@ const Login = () => {
 
           <Stack
             alignItems="center"
-            py={5}
+            py={3}
             fontSize={50}
             justifyContent="center"
             direction="row"
@@ -220,103 +223,71 @@ const Login = () => {
               </Box>
               <Box mt={5} m={1} color="text.secondary">
                 <Typography variant="h5" fontWeight="bold">
-                  Sign in to Minimal
+                  Get started absolutely free
                 </Typography>
                 <Typography mt={2}>
-                  New user?
+                  Already have an account?
                   <Link
                     mx={1}
-                    to={"/register"}
+                    to={"/login"}
+                    component={NavLink}
                     underline="hover"
                     variant="body2"
-                    component={NavLink}
                   >
-                    Create an account
+                    Sign in
                   </Link>
                 </Typography>
               </Box>
-              <Paper
-                elevation={0}
-                sx={{
-                  display: "flex  ",
-                  backgroundColor: "secondary.light",
-                  p: 1,
-                  mt: 5,
-                  color: "text.secondary",
-                }}
-              >
-                <InfoIcon sx={{ color: "primary.main", mx: 1 }} />
-                <Typography component="div" display="inline">
-                  Use email :&nbsp;
-                  <Typography
-                    component="div"
-                    display="inline"
-                    fontWeight="bold"
-                  >
-                    demo@example.com
-                    <Typography component="div" display="inline">
-                      &nbsp; password :{" "}
-                      <Typography
-                        component="div"
-                        display="inline"
-                        fontWeight="bold"
-                      >
-                        demo1234
-                      </Typography>
-                    </Typography>
-                  </Typography>
-                </Typography>
-              </Paper>
-              <Stack my={4} gap={3}>
+
+              <Stack my={4} gap={1} minWidth="350px">
                 <FormControl sx={{ m: 1 }} variant="outlined">
-                  <InputLabel htmlFor="outlined-multiline-flexible">
-                    Email address
-                  </InputLabel>
-                  <OutlinedInput
-                    onChange={(e) => {
-                      setFormData({ ...formData, email: e.target.value });
-                    }}
-                    value={formData.email}
-                    sx={{ borderRadius: "10px" }}
-                    id="outlined-multiline-flexible"
-                    endAdornment={
-                      <InputAdornment position="end"></InputAdornment>
-                    }
-                    label="Email address"
-                  />
+                  <FormGroup>
+                    <InputLabel htmlFor="outlined-multiline-flexible">
+                      Email address
+                    </InputLabel>
+                    <OutlinedInput
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                      }}
+                      value={formData.email}
+                      sx={{ borderRadius: "10px" }}
+                      id="outlined-multiline-flexible"
+                      endAdornment={
+                        <InputAdornment position="end"></InputAdornment>
+                      }
+                      label="Email address"
+                    />
+                  </FormGroup>
                 </FormControl>
                 <FormControl sx={{ m: 1 }} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-password">
-                    Password
-                  </InputLabel>
-                  <OutlinedInput
-                    onChange={(e) => {
-                      setFormData({ ...formData, password: e.target.value });
-                    }}
-                    value={formData.password}
-                    sx={{ borderRadius: "10px" }}
-                    id="outlined-adornment-password"
-                    type={showPassword ? "text" : "password"}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton
-                          aria-label="toggle password visibility"
-                          onClick={handleClickShowPassword}
-                          onMouseDown={handleMouseDownPassword}
-                          edge="end"
-                        >
-                          {showPassword ? <RiEyeLine /> : <RiEyeCloseLine />}
-                        </IconButton>
-                      </InputAdornment>
-                    }
-                    label="Password"
-                  />
+                  <FormGroup>
+                    <InputLabel htmlFor="outlined-adornment-password">
+                      Password
+                    </InputLabel>
+                    <OutlinedInput
+                      onChange={(e) => {
+                        setFormData({ ...formData, password: e.target.value });
+                      }}
+                      value={formData.password}
+                      sx={{ borderRadius: "10px" }}
+                      id="outlined-adornment-password"
+                      type={showPassword ? "text" : "password"}
+                      endAdornment={
+                        <InputAdornment position="end">
+                          <IconButton
+                            aria-label="toggle password visibility"
+                            onClick={handleClickShowPassword}
+                            onMouseDown={handleMouseDownPassword}
+                            edge="end"
+                          >
+                            {showPassword ? <RiEyeLine /> : <RiEyeCloseLine />}
+                          </IconButton>
+                        </InputAdornment>
+                      }
+                      label="Password"
+                    />
+                  </FormGroup>
                 </FormControl>
-                <Typography ml="auto" mt={2}>
-                  <Link mx={1} href="#" color="text.secondary" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Typography>
                 <FormControl sx={{ m: 1 }} variant="outlined">
                   <Button
                     onClick={handleSubmit}
@@ -329,7 +300,7 @@ const Login = () => {
                     }}
                     variant="contained"
                   >
-                    Login
+                    Create account
                   </Button>
                 </FormControl>
               </Stack>
@@ -341,4 +312,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
