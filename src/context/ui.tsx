@@ -4,11 +4,13 @@ import React, { createContext, useReducer, Dispatch } from "react";
 interface State {
   isSettingBar: boolean;
   isSideBar: boolean;
+  isLoggedIn: boolean;
 }
 
 const initialState: State = {
   isSettingBar: false,
   isSideBar: false,
+  isLoggedIn: false,
 };
 
 type Action = {
@@ -16,7 +18,9 @@ type Action = {
     | "OPEN_SETTING_BAR"
     | "CLOSE_SETTING_BAR"
     | "OPEN_SIDE_BAR"
-    | "CLOSE_SIDE_BAR";
+    | "CLOSE_SIDE_BAR"
+    | "LOGGED_IN"
+    | "LOGGED_OUT";
 };
 
 const reducer = (state: State, action: Action): State => {
@@ -29,6 +33,10 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, isSideBar: true };
     case "CLOSE_SIDE_BAR":
       return { ...state, isSideBar: false };
+    case "LOGGED_IN":
+      return { ...state, isLoggedIn: true };
+    case "LOGGED_OUT":
+      return { ...state, isLoggedIn: false };
     // Add other actions here
     default:
       return state;

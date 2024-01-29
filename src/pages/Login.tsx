@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import Box from "@mui/material/Box";
 import { Suspense } from "react";
 import Grid from "@mui/material/Grid";
@@ -7,8 +7,12 @@ import {
   Toolbar,
   Typography,
   Link,
-  TextField,
   Button,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
 } from "@mui/material";
 import { useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
@@ -17,8 +21,39 @@ import { SiMaterialUi } from "@react-icons/all-files/si/SiMaterialUi";
 import { SiTypescript } from "@react-icons/all-files/si/SiTypescript";
 import { SiWebpack } from "@react-icons/all-files/si/SiWebpack";
 import InfoIcon from "@mui/icons-material/Info";
+import { RiEyeCloseLine } from "@react-icons/all-files/ri/RiEyeCloseLine";
+import { RiEyeLine } from "@react-icons/all-files/ri/RiEyeLine";
+import { UIContext } from "../context/ui";
+import { useNavigate } from "react-router-dom";
+
+let email = "demo@example.com";
+let password = "demo1234";
 
 const Login = () => {
+  const { dispatch } = useContext(UIContext);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const navigate = useNavigate();
+  const handleMouseDownPassword = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    event.preventDefault();
+  };
+
+  const handleSubmit = () => {
+    if (formData.email === email && formData.password === password) {
+      console.log("yes");
+      dispatch({ type: "LOGGED_IN" });
+      navigate("/");
+    }
+  };
+
   const theme = useTheme();
   return (
     <Suspense fallback={<h1>Loading</h1>}>
@@ -121,6 +156,7 @@ const Login = () => {
           display="flex"
           sx={{
             minWidth: "400px",
+            maxWidth: { md: "450px" },
             backgroundColor: "#fff",
             flexGrow: { xs: 1, md: 0 },
           }}
@@ -221,7 +257,7 @@ const Login = () => {
                 <Typography display="inline">
                   Use email :&nbsp;
                   <Typography display="inline" fontWeight="bold">
-                    demo@minimals.cc
+                    demo@example.com
                     <Typography display="inline">
                       &nbsp; password :{" "}
                       <Typography display="inline" fontWeight="bold">
@@ -232,40 +268,70 @@ const Login = () => {
                 </Typography>
               </Paper>
               <Stack my={4} gap={3}>
-                <TextField
-                  InputProps={{
-                    style: {
+                <FormControl sx={{ m: 1 }} variant="outlined">
+                  <InputLabel htmlFor="outlined-multiline-flexible">
+                    Email address
+                  </InputLabel>
+                  <OutlinedInput
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value });
+                    }}
+                    value={formData.email}
+                    sx={{ borderRadius: "10px" }}
+                    id="outlined-multiline-flexible"
+                    endAdornment={
+                      <InputAdornment position="end"></InputAdornment>
+                    }
+                    label="Email address"
+                  />
+                </FormControl>
+                <FormControl sx={{ m: 1 }} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-password">
+                    Password
+                  </InputLabel>
+                  <OutlinedInput
+                    onChange={(e) => {
+                      setFormData({ ...formData, password: e.target.value });
+                    }}
+                    value={formData.password}
+                    sx={{ borderRadius: "10px" }}
+                    id="outlined-adornment-password"
+                    type={showPassword ? "text" : "password"}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton
+                          aria-label="toggle password visibility"
+                          onClick={handleClickShowPassword}
+                          onMouseDown={handleMouseDownPassword}
+                          edge="end"
+                        >
+                          {showPassword ? <RiEyeLine /> : <RiEyeCloseLine />}
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                    label="Password"
+                  />
+                </FormControl>
+                <Typography ml="auto" mt={2}>
+                  <Link mx={1} href="#" color="text.secondary" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Typography>
+                <FormControl sx={{ m: 1 }} variant="outlined">
+                  <Button
+                    onClick={handleSubmit}
+                    size="small"
+                    sx={{
+                      color: "#fff",
                       borderRadius: "10px",
-                    },
-                  }}
-                  id="outlined-multiline-flexible"
-                  label="Email address"
-                  multiline
-                  maxRows={4}
-                />
-                <TextField
-                  InputProps={{
-                    style: {
-                      borderRadius: "10px",
-                    },
-                  }}
-                  id="outlined-multiline-flexible"
-                  label="Password"
-                  multiline
-                  maxRows={4}
-                />
-                <Button
-                  size="small"
-                  sx={{
-                    color: "#fff",
-                    borderRadius: "10px",
-                    p: 1,
-                    fontSize: 18,
-                  }}
-                  variant="contained"
-                >
-                  Login
-                </Button>
+                      p: 1,
+                      fontSize: 18,
+                    }}
+                    variant="contained"
+                  >
+                    Login
+                  </Button>
+                </FormControl>
               </Stack>
             </Box>
           </Box>

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Navigate, Outlet } from "react-router-dom";
+import { UIContext } from "../context/ui";
 
 const ProtectedRoutes = () => {
-  let authToken = true;
-  console.log("login : ", authToken);
-  return authToken ? <Outlet /> : <Navigate to="login" />;
+  const { dispatch, state } = useContext(UIContext);
+
+  return state.isLoggedIn ? <Outlet /> : <Navigate to="login" />;
 };
 
 export default ProtectedRoutes;
