@@ -37,7 +37,7 @@ const styles = {
     borderLeft: "8px solid transparent",
     borderRight: "8px solid transparent",
     borderBottom: "12px solid",
-    borderBottomColor: "neutral.light",
+    borderBottomColor: "background.paper",
     fontSize: 0,
     lineHeight: 0,
     textAlign: "center",

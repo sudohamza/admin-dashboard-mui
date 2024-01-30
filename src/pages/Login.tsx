@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import { Suspense } from "react";
 import {
@@ -27,6 +27,8 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LinearLoading from "../components/LinearLoading";
 import SvgLogo from "../components/SvgLogo";
+import { CustomThemeContext } from "../theme/theme";
+import { ThemeName } from "../utils/types";
 
 let email = "demo@example.com";
 let password = "demo1234";
@@ -37,9 +39,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-
   const [showPassword, setShowPassword] = React.useState(false);
-
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const navigate = useNavigate();
   const handleMouseDownPassword = (
@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <Suspense fallback={<LinearLoading />}>
       {/* Container */}
-      <Box display="flex" minHeight="100vh">
+      <Box sx={{ transition: "all 5s ease" }} display="flex" minHeight="100vh">
         {/* Main text and hero image */}
         <Box sx={{ display: { xs: "none", md: "block" } }} flexGrow={1}>
           <Box>

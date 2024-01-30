@@ -43,6 +43,16 @@ const global = {
         },
       },
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: "#fff",
+          borderRadius: "10px",
+          textTransform: "none",
+          boxShadow: "none",
+        },
+      },
+    },
   },
 };
 
@@ -71,7 +81,7 @@ export const generateTheme = (
             }),
             secondary: palette.augmentColor({
               color: {
-                main: ThemeColor[400] + "20",
+                main: ThemeColor[500] + "20",
               },
             }),
             text: {
