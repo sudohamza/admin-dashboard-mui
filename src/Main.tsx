@@ -15,7 +15,7 @@ const styles = {
     backgroundColor: "background.default",
   },
   contentContainer: {
-    px: 5,
+    px: 2,
     py: 10,
   },
 };

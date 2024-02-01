@@ -10,7 +10,7 @@ interface State {
 const initialState: State = {
   isSettingBar: false,
   isSideBar: false,
-  isLoggedIn: false,
+  isLoggedIn: true,
 };
 
 type Action = {
