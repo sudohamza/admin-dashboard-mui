@@ -5,6 +5,8 @@ import BarChartIcon from "@mui/icons-material/BarChart";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FileCopyIcon from "@mui/icons-material/FileCopy";
 import CategoryIcon from "@mui/icons-material/Category";
+import { AiFillBank } from "@react-icons/all-files/ai/AiFillBank";
+import { TiBook } from "@react-icons/all-files/ti/TiBook";
 
 export const sidebarItems = [
   {
@@ -25,6 +27,16 @@ export const sidebarItems = [
         name: "Analytics",
         path: "analytics",
         icon: <BarChartIcon fontSize="inherit" />,
+      },
+      {
+        name: "Banking",
+        path: "banking",
+        icon: <AiFillBank fontSize="inherit" />,
+      },
+      {
+        name: "Booking",
+        path: "booking",
+        icon: <TiBook fontSize="inherit" />,
       },
     ],
   },

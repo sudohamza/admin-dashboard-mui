@@ -22,6 +22,7 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import MenuIcon from "@mui/icons-material/Menu";
 import { UIContext } from "../context/ui";
+import { useTheme } from "@mui/material";
 
 const styles = {
   overlay: {
@@ -37,7 +38,6 @@ const styles = {
     borderLeft: "8px solid transparent",
     borderRight: "8px solid transparent",
     borderBottom: "12px solid",
-    borderBottomColor: "background.paper",
     fontSize: 0,
     lineHeight: 0,
     textAlign: "center",
@@ -57,6 +57,7 @@ const styles = {
 const UserProfileMenu = () => {
   const { dispatch } = useContext(UIContext);
   const settings = ["Home", "Profile", "Settings"];
+  const theme = useTheme();
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
     null
   );
@@ -91,7 +92,13 @@ const UserProfileMenu = () => {
             <Box sx={styles.menuContainer}>
               <Paper sx={{ py: 1 }} elevation={24}>
                 {/******************  Notch *************/}
-                <Box sx={styles.notch} />
+                <Box
+                  sx={
+                    theme.palette.mode === "dark"
+                      ? { ...styles.notch, borderBottomColor: "#424a54" }
+                      : { ...styles.notch, borderBottomColor: "#fff" }
+                  }
+                />
                 <Box px={1} py={0.5}>
                   <Stack sx={{ borderRadius: "10px" }}>
                     <Typography color="text.secondary" variant="subtitle2">

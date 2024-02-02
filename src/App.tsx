@@ -5,15 +5,15 @@ import { UIProvider } from "./context/ui";
 import LinearLoading from "./components/LinearLoading";
 
 const LazyMain = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 100));
   return import("./Main");
 });
 const LazyLogin = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 100));
   return import("./pages/Login");
 });
 const LazyRegister = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 100));
   return import("./pages/Register");
 });
 const App = () => {

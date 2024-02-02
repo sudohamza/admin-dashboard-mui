@@ -27,8 +27,6 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LinearLoading from "../components/LinearLoading";
 import SvgLogo from "../components/SvgLogo";
-import { CustomThemeContext } from "../theme/theme";
-import { ThemeName } from "../utils/types";
 
 let email = "demo@example.com";
 let password = "demo1234";

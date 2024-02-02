@@ -7,23 +7,25 @@ import {
   CardContent,
   Card,
   Typography,
+  ListItem,
+  List,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
 const data = [
   {
     id: 1,
-    title: "One",
+    title: "Boston Soft FootBed Sandal",
     img: "https://api-prod-minimal-v510.vercel.app/assets/images/m_product/product_5.jpg",
   },
   {
     id: 2,
-    title: "Two",
+    title: "Nike Air Zoom Shoes",
     img: "https://api-prod-minimal-v510.vercel.app/assets/images/m_product/product_3.jpg",
   },
   {
     id: 3,
-    title: "Three",
+    title: "Nike Air Force One ",
     img: "https://api-prod-minimal-v510.vercel.app/assets/images/m_product/product_1.jpg",
   },
 ];
@@ -31,13 +33,6 @@ const data = [
 type MyCardProps = {
   title: string;
   img: string;
-};
-
-const styles = {
-  activeSlide: {},
-  previousSlide: {},
-  nextSlide: {},
-  default: {},
 };
 
 const MyCard = ({ title, img }: MyCardProps) => {
@@ -72,11 +67,27 @@ const MyCard = ({ title, img }: MyCardProps) => {
     </Box>
   );
 };
+const styles = {
+  activeSlide: {
+    transform: "translateX(0%)",
+  },
+  previousSlide: {
+    transform: "translateX(-100%)",
+  },
+  nextSlide: {
+    opacity: 0,
+    transform: "translateX(100%)",
+  },
+  default: {
+    transition: "transform 1s",
+    position: "absolute",
+    inset: 0,
+  },
+};
 
 const ImageSlider = () => {
   const [cards, setCards] = useState(data);
-  const [currentCard, setCurrentCard] = useState(1);
-
+  const [index, setCurrentCard] = useState(0);
   useEffect(() => {
     const timerID = setInterval(() => {
       setCurrentCard((prevIndex) => (prevIndex + 1) % cards.length);
@@ -87,34 +98,31 @@ const ImageSlider = () => {
   return (
     <Paper
       sx={{
-        height: "100%",
-        position: "relative",
+        height: { xs: "307px" },
         overflow: "hidden",
       }}
     >
-      {cards.map((item, index) => {
-        return (
-          <Box
-            position="absolute"
-            sx={{
-              inset: 0,
-              transform: `translateX(${
-                index < currentCard
-                  ? -100
-                  : index > currentCard
-                  ? 100
-                  : Math.abs(index - currentCard) > 1
-                  ? 100
-                  : 0
-              }%)`,
-              transition: "transform 1s",
-            }}
-            key={index}
-          >
-            <MyCard key={index} {...item} />
-          </Box>
-        );
-      })}
+      <Box sx={{ height: "100%", position: "relative" }}>
+        <Box>
+          {cards.map((item, personIndex) => {
+            return (
+              <Box
+                sx={
+                  personIndex === index
+                    ? { ...styles.default, ...styles.activeSlide }
+                    : personIndex === index - 1 ||
+                      (index === 0 && personIndex === cards.length - 1)
+                    ? { ...styles.default, ...styles.previousSlide }
+                    : { ...styles.default, ...styles.nextSlide }
+                }
+                key={personIndex}
+              >
+                <MyCard key={index} {...item} />
+              </Box>
+            );
+          })}
+        </Box>
+      </Box>
     </Paper>
   );
 };
