@@ -7,8 +7,10 @@ import SettingsDrawer from "./components/SettingsDrawer";
 import LinearLoading from "./components/LinearLoading";
 import { lazy } from "react";
 import NotificationDrawer from "./components/NotificationDrawer";
-const LazyDashboard = lazy(() => import("./pages/Dashboard"));
-
+const LazyDashboard = lazy(async () => {
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+  return import("./pages/Dashboard");
+});
 const styles = {
   main: {
     height: "100%",

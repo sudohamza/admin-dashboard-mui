@@ -11,7 +11,7 @@ interface State {
 const initialState: State = {
   isSettingBar: false,
   isSideBar: false,
-  isLoggedIn: true,
+  isLoggedIn: false,
   isNotificationDrawer: false,
 };
 
