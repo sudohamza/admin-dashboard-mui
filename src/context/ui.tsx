@@ -5,12 +5,14 @@ interface State {
   isSettingBar: boolean;
   isSideBar: boolean;
   isLoggedIn: boolean;
+  isNotificationDrawer: boolean;
 }
 
 const initialState: State = {
   isSettingBar: false,
   isSideBar: false,
   isLoggedIn: true,
+  isNotificationDrawer: true,
 };
 
 type Action = {
@@ -20,7 +22,9 @@ type Action = {
     | "OPEN_SIDE_BAR"
     | "CLOSE_SIDE_BAR"
     | "LOGGED_IN"
-    | "LOGGED_OUT";
+    | "LOGGED_OUT"
+    | "OPEN_NOTIFICATION_DRAWER"
+    | "CLOSE_NOTIFICATION_DRAWER";
 };
 
 const reducer = (state: State, action: Action): State => {
@@ -37,7 +41,10 @@ const reducer = (state: State, action: Action): State => {
       return { ...state, isLoggedIn: true };
     case "LOGGED_OUT":
       return { ...state, isLoggedIn: false };
-    // Add other actions here
+    case "OPEN_NOTIFICATION_DRAWER":
+      return { ...state, isNotificationDrawer: true };
+    case "CLOSE_NOTIFICATION_DRAWER":
+      return { ...state, isNotificationDrawer: false };
     default:
       return state;
   }

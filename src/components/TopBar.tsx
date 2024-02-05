@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Grow from "@mui/material/Grow";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -23,6 +23,9 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import MenuIcon from "@mui/icons-material/Menu";
 import { UIContext } from "../context/ui";
 import { useTheme } from "@mui/material";
+import British from "../svg/flags/British";
+import French from "../svg/flags/French";
+import UAE from "../svg/flags/UAE";
 
 const styles = {
   overlay: {
@@ -46,12 +49,205 @@ const styles = {
     top: -12,
     opacity: 0.95,
   },
-  menuContainer: {
+  menuContainerUser: {
     position: "relative",
     borderRadius: "10px",
     mr: { sm: "20px", lg: "45px" },
     mt: "-5px",
   },
+  menuContainerContact: {
+    position: "relative",
+    borderRadius: "10px",
+    mr: { xs: "125px", lg: "165px" },
+  },
+  menuContainerLang: {
+    position: "relative",
+    borderRadius: "10px",
+    mr: { xs: "85px", lg: "85px" },
+  },
+};
+
+const LanguageMenu = () => {
+  const [lang, setLang] = useState(0);
+
+  const languages = [
+    { id: 1, name: "English", icon: <British /> },
+    { id: 2, name: "French", icon: <French /> },
+    { id: 3, name: "Arabic", icon: <UAE /> },
+  ];
+
+  const theme = useTheme();
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <ClickAwayListener onClickAway={handleCloseUserMenu}>
+      <Box display="flex" alignItems="center">
+        <Box>
+          <IconButton
+            size="small"
+            sx={
+              Boolean(anchorElUser)
+                ? {
+                    backgroundColor: "background.paper",
+                    display: "flex",
+                    p: 1.5,
+                  }
+                : { p: 1.5, display: "flex" }
+            }
+            color="inherit"
+            onClick={handleOpenUserMenu}
+          >
+            {languages[lang].icon}
+          </IconButton>
+        </Box>
+        <Popper
+          disablePortal
+          sx={{
+            opacity: 0.95,
+            zIndex: 1105,
+          }}
+          anchorEl={anchorElUser}
+          open={Boolean(anchorElUser)}
+        >
+          <Grow
+            in={Boolean(anchorElUser)}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(anchorElUser ? { timeout: 400 } : {})}
+          >
+            <Box sx={styles.menuContainerLang}>
+              <Paper elevation={24}>
+                {languages.map((item, index) => (
+                  <ListItemButton
+                    onClick={() => {
+                      setLang(index);
+                      handleCloseUserMenu();
+                    }}
+                    sx={{ px: 2 }}
+                    disableGutters
+                    key={item.id}
+                  >
+                    <Stack
+                      gap={2}
+                      direction="row"
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <Box display="flex">{item.icon}</Box>
+                      <Box>
+                        <Typography>{item.name}</Typography>
+                      </Box>
+                    </Stack>
+                  </ListItemButton>
+                ))}
+              </Paper>
+            </Box>
+          </Grow>
+        </Popper>
+      </Box>
+    </ClickAwayListener>
+  );
+};
+
+const ContactMenu = () => {
+  const { dispatch } = useContext(UIContext);
+  const contacts = [
+    {
+      id: 1,
+      name: "Alan Turing",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_1.jpg",
+    },
+    {
+      id: 2,
+      name: "Uncle Bob",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_2.jpg",
+    },
+    {
+      id: 3,
+      name: "Melanie Ramanujan",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_3.jpg",
+    },
+    {
+      id: 4,
+      name: "Chase Day",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_4.jpg",
+    },
+  ];
+  const theme = useTheme();
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(
+    null
+  );
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
+  return (
+    <ClickAwayListener onClickAway={handleCloseUserMenu}>
+      <Box>
+        <IconButton
+          sx={
+            Boolean(anchorElUser) ? { backgroundColor: "background.paper" } : {}
+          }
+          color="inherit"
+          onClick={handleOpenUserMenu}
+        >
+          <PeopleAltIcon />
+        </IconButton>
+
+        <Popper
+          disablePortal
+          sx={{
+            opacity: 0.95,
+            zIndex: 1105,
+          }}
+          anchorEl={anchorElUser}
+          open={Boolean(anchorElUser)}
+        >
+          <Grow
+            in={Boolean(anchorElUser)}
+            style={{ transformOrigin: "0 0 0" }}
+            {...(anchorElUser ? { timeout: 400 } : {})}
+          >
+            <Box sx={styles.menuContainerContact}>
+              <Paper sx={{ p: 2 }} elevation={24}>
+                <Typography
+                  color="text.secondary"
+                  variant="h5"
+                  fontSize="xl"
+                  fontWeight="bold"
+                >
+                  Contacts ({contacts.length})
+                </Typography>
+
+                {contacts.map((item) => (
+                  <ListItemButton disableGutters key={item.id}>
+                    <Stack gap={1} minWidth="240px" direction="row">
+                      <Box>
+                        <Avatar src={item.img} />
+                      </Box>
+                      <Box>
+                        <Typography>{item.name}</Typography>
+                      </Box>
+                    </Stack>
+                  </ListItemButton>
+                ))}
+              </Paper>
+            </Box>
+          </Grow>
+        </Popper>
+      </Box>
+    </ClickAwayListener>
+  );
 };
 
 const UserProfileMenu = () => {
@@ -89,7 +285,7 @@ const UserProfileMenu = () => {
             style={{ transformOrigin: "0 0 0" }}
             {...(anchorElUser ? { timeout: 400 } : {})}
           >
-            <Box sx={styles.menuContainer}>
+            <Box sx={styles.menuContainerUser}>
               <Paper sx={{ py: 1 }} elevation={24}>
                 {/******************  Notch *************/}
                 <Box
@@ -175,18 +371,19 @@ const TopBar = () => {
             {/* Setting and user icons container */}
             <Toolbar>
               <Stack gap={2} direction="row" alignItems="center">
-                <Box gap={2}>
-                  <IconButton color="inherit">
-                    <LanguageIcon />
-                  </IconButton>
-                  <IconButton color="inherit">
+                <Box display="flex" alignItems="center">
+                  <LanguageMenu />
+                  <IconButton
+                    onClick={() =>
+                      dispatch({ type: "OPEN_NOTIFICATION_DRAWER" })
+                    }
+                    color="inherit"
+                  >
                     <Badge badgeContent={4} color="error">
                       <NotificationsIcon />
                     </Badge>
                   </IconButton>
-                  <IconButton color="inherit">
-                    <PeopleAltIcon />
-                  </IconButton>
+                  <ContactMenu />
                   <IconButton
                     onClick={() => dispatch({ type: "OPEN_SETTING_BAR" })}
                     color="inherit"

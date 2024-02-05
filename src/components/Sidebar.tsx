@@ -7,7 +7,7 @@ import { sidebarItems } from "../data/sidebarMenu";
 import { UIContext } from "../context/ui";
 import { useTheme } from "@mui/material";
 import { Stack } from "@mui/system";
-import SvgLogo from "./SvgLogo";
+import SvgLogo from "../svg/SvgLogo";
 
 const drawerWidth = 260;
 

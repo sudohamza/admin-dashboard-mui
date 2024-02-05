@@ -26,7 +26,7 @@ import { UIContext } from "../context/ui";
 import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LinearLoading from "../components/LinearLoading";
-import SvgLogo from "../components/SvgLogo";
+import SvgLogo from "../svg/SvgLogo";
 
 let email = "demo@example.com";
 let password = "demo1234";

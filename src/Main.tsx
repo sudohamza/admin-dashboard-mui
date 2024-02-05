@@ -6,6 +6,7 @@ import TopBar from "./components/TopBar";
 import SettingsDrawer from "./components/SettingsDrawer";
 import LinearLoading from "./components/LinearLoading";
 import { lazy } from "react";
+import NotificationDrawer from "./components/NotificationDrawer";
 const LazyDashboard = lazy(() => import("./pages/Dashboard"));
 
 const styles = {
@@ -24,6 +25,7 @@ const Main = () => {
   return (
     <>
       <Suspense fallback={<LinearLoading />}>
+        <NotificationDrawer />
         <Sidebar />
         <SettingsDrawer />
         <TopBar />

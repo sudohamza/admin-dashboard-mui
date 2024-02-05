@@ -84,3 +84,30 @@ export const sidebarItems = [
     ],
   },
 ];
+
+export const infoLetData = [
+  {
+    id: 1,
+    subtitle: "Product Sold",
+    currentWeekSales: 756,
+    lastWeekSales: 650,
+    color: "#7635dc",
+    data: [22, 8, 35, 50, 82, 84, 77, 12, 86, 48],
+  },
+  {
+    id: 2,
+    subtitle: "Total Balance",
+    currentWeekSales: 18756,
+    lastWeekSales: 19000,
+    color: "#18bbd3",
+    data: [56, 47, 40, 50, 82, 84, 77, 12, 54, 68, 69, 70],
+  },
+  {
+    id: 3,
+    subtitle: "Sales Profit",
+    currentWeekSales: 4876,
+    lastWeekSales: 4450,
+    color: "#ffd360",
+    data: [40, 70, 75, 70, 50, 28, 7, 64, 38, 27],
+  },
+];
