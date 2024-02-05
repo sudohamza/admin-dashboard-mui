@@ -12,7 +12,7 @@ const initialState: State = {
   isSettingBar: false,
   isSideBar: false,
   isLoggedIn: true,
-  isNotificationDrawer: true,
+  isNotificationDrawer: false,
 };
 
 type Action = {
