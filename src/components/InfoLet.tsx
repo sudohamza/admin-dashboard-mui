@@ -1,5 +1,5 @@
 import { Box, Paper, Stack, Typography, colors } from "@mui/material";
-import React from "react";
+import React, { PureComponent } from "react";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import TrendingDownIcon from "@mui/icons-material/TrendingDown";
 import { SparkLineChart } from "@mui/x-charts/SparkLineChart";
@@ -27,11 +27,17 @@ const InfoLet = ({
   const percentageOfDifference =
     ((currentWeekSales - lastWeekSales) / lastWeekSales) * 100;
 
+  let refinedData: any = [];
+  data.forEach((item) => {
+    refinedData.push({ value: item });
+  });
+
   return (
     <Paper elevation={0}>
       <Stack
         direction="row"
         alignItems="center"
+        justifyContent="space-between"
         py={2}
         sx={{ px: { lg: 5, xs: 2 } }}
       >

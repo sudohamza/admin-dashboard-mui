@@ -7,8 +7,9 @@ import SettingsDrawer from "./components/SettingsDrawer";
 import LinearLoading from "./components/LinearLoading";
 import { lazy } from "react";
 import NotificationDrawer from "./components/NotificationDrawer";
+let delay = 1000;
 const LazyDashboard = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, delay));
   return import("./pages/Dashboard");
 });
 const styles = {
@@ -35,6 +36,8 @@ const Main = () => {
           <Box sx={styles.contentContainer}>
             <Routes>
               <Route path="/" Component={LazyDashboard} />
+              <Route path="/commerce" Component={LazyDashboard} />
+
               <Route path="*" element={<Box>404 Page Not Found</Box>} />
             </Routes>
           </Box>

@@ -4,16 +4,18 @@ import ProtectedRoutes from "./utils/ProtectedRoutes";
 import { UIProvider } from "./context/ui";
 import LinearLoading from "./components/LinearLoading";
 
+let delay = 1000;
+
 const LazyMain = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, delay));
   return import("./Main");
 });
 const LazyLogin = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, delay));
   return import("./pages/Login");
 });
 const LazyRegister = lazy(async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, delay));
   return import("./pages/Register");
 });
 const App = () => {

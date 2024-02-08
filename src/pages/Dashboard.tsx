@@ -1,26 +1,15 @@
-import {
-  Box,
-  Button,
-  Grid,
-  Paper,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
-import React, { useState } from "react";
+import { Button, Grid, Typography, useTheme } from "@mui/material";
+import React, { Suspense, useState } from "react";
 import HeroSvg from "../svg/HeroSvg";
 import ImageSlider from "../components/ImageSlider";
 import InfoLet from "../components/InfoLet";
-import { infoLetData } from "../data/sidebarMenu";
-import British from "../svg/flags/British";
-import French from "../svg/flags/French";
-import UAE from "../svg/flags/UAE";
+import { infoLetData } from "../data";
 
 const Dashboard = () => {
   const theme = useTheme();
   const [infoLet, setInfoLet] = useState(infoLetData);
   return (
-    <>
+    <Suspense fallback={""}>
       <Grid spacing={2} container>
         <Grid xs={12} sm={12} md={8} lg={8} item>
           <Grid sx={{ backgroundColor: "#f4f6f8", borderRadius: "10px" }}>
@@ -52,7 +41,9 @@ const Dashboard = () => {
               </Grid>
               <Grid
                 px={2}
-                sx={{ textAlign: { xs: "center", sm: "center", md: "right" } }}
+                sx={{
+                  textAlign: { xs: "center", sm: "center", md: "right" },
+                }}
                 item
               >
                 <HeroSvg />
@@ -73,7 +64,7 @@ const Dashboard = () => {
           );
         })}
       </Grid>
-    </>
+    </Suspense>
   );
 };
 

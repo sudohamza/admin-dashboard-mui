@@ -111,3 +111,58 @@ export const infoLetData = [
     data: [40, 70, 75, 70, 50, 28, 7, 64, 38, 27],
   },
 ];
+
+export const currentNotifications = [
+  {
+    id: 1,
+    type: "request",
+    title: "sent you a friend request.",
+    body: {},
+    isRead: false,
+    timeStamp: "about 2 hours ago",
+    from: {
+      name: "Deja Brady",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_2.jpg",
+    },
+  },
+  {
+    id: 2,
+    type: "message",
+    title: "mention you in Minimal Mui",
+    body: {
+      text: "feedback by asking questions or just leave a note of appreciation.",
+    },
+    isRead: true,
+    timeStamp: "1 day ago",
+    from: {
+      name: "Lanny Davidson",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_4.jpg",
+    },
+  },
+  {
+    id: 3,
+    type: "message",
+    title: "sent you a friend request.",
+    isRead: false,
+    body: {
+      text: "feedback by asking questions or just leave a note of appreciation.",
+    },
+    timeStamp: "2 days ago",
+    from: {
+      name: "Angelique Morse",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_5.jpg",
+    },
+  },
+  {
+    id: 4,
+    type: "request",
+    title: "sent you a friend request.",
+    isRead: true,
+    body: {},
+    timeStamp: "2 days ago",
+    from: {
+      name: "Angelique Morse",
+      img: "https://api-prod-minimal-v510.vercel.app/assets/images/avatar/avatar_3.jpg",
+    },
+  },
+];

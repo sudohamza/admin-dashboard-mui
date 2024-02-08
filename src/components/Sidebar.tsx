@@ -3,7 +3,7 @@ import Drawer from "@mui/material/Drawer";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import NestedMenu from "./NestedMenu";
-import { sidebarItems } from "../data/sidebarMenu";
+import { sidebarItems } from "../data";
 import { UIContext } from "../context/ui";
 import { useTheme } from "@mui/material";
 import { Stack } from "@mui/system";

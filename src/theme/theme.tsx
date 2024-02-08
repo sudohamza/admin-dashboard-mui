@@ -33,7 +33,7 @@ type MyThemeProviderProps = {
 };
 
 export default function MyThemeProvider(props: MyThemeProviderProps) {
-  const [mode, setMode] = React.useState<Mode>("light");
+  const [mode, setMode] = React.useState<Mode>("dark");
   const [theme, setTheme] = React.useState<ThemeName>("BLUE");
   const [contrast, setContrast] = useState<ThemeContrast>("NORMAL");
 

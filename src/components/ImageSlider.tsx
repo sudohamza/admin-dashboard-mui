@@ -49,6 +49,7 @@ const MyCard = ({ title, img }: MyCardProps) => {
       <Box
         position="absolute"
         width="100%"
+        height="100%"
         p={2}
         py={3}
         bottom={0}
@@ -57,12 +58,15 @@ const MyCard = ({ title, img }: MyCardProps) => {
             "linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 100%)",
         }}
       >
-        <Typography color="#fff" variant="h5">
-          {title}
-        </Typography>
-        <Button sx={{ mt: 2 }} variant="contained">
-          Buy Now
-        </Button>
+        <Box mt="150px">
+          <Typography variant="overline">new</Typography>
+          <Typography color="#fff" variant="h5">
+            {title}
+          </Typography>
+          <Button sx={{ mt: 2 }} variant="contained">
+            Buy Now
+          </Button>
+        </Box>
       </Box>
     </Box>
   );

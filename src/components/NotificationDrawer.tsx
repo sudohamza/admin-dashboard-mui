@@ -8,12 +8,14 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { UIContext } from "../context/ui";
 import CloseIcon from "@mui/icons-material/Close";
-import { Grid, useTheme, AppBar } from "@mui/material";
+import { Grid, useTheme, AppBar, ListSubheader, Paper } from "@mui/material";
 import { CustomThemeContext } from "../theme/theme";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import { currentNotifications } from "../data";
+import MessageBody from "./MessageBody";
 
-const drawerWidth = 350;
+const drawerWidth = 420;
 
 const styles = {
   drawerContainer: {
@@ -51,7 +53,6 @@ const styles = {
 
 interface TabPanelProps {
   children?: React.ReactNode;
-  dir?: string;
   index: number;
   value: number;
 }
@@ -68,7 +69,7 @@ function TabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
           <Box>{children}</Box>
         </Box>
       )}
@@ -97,28 +98,41 @@ function FullWidthTabs() {
 
   return (
     <Box>
-      <Box position="static">
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          indicatorColor="secondary"
-          textColor="primary"
-          variant="fullWidth"
-        >
-          <Tab label="All" {...a11yProps(0)} />
-          <Tab label="Unread" {...a11yProps(1)} />
-          <Tab label="Archived" {...a11yProps(2)} />
-        </Tabs>
-      </Box>
-      <TabPanel value={value} index={0} dir={theme.direction}>
-        <Box>One</Box>
+      <ListSubheader
+        disableGutters
+        sx={{ backgroundColor: "background.default" }}
+      >
+        <Header />
+        <Divider />
+        <Box>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            variant="fullWidth"
+          >
+            <Tab label="All" {...a11yProps(0)} />
+            <Tab label="Unread" {...a11yProps(1)} />
+            <Tab label="Archived" {...a11yProps(2)} />
+          </Tabs>
+          <Divider sx={{ borderColor: "secondary.main" }} />
+        </Box>
+      </ListSubheader>
+
+      <TabPanel value={value} index={0}>
+        {currentNotifications.map((item) => {
+          return <MessageBody key={item.id} {...item} />;
+        })}
       </TabPanel>
-      <TabPanel value={value} index={1} dir={theme.direction}>
-        Item Two
+
+      <TabPanel value={value} index={1}>
+        {currentNotifications.map((item) => {
+          if (!item.isRead) return <MessageBody key={item.id} {...item} />;
+        })}
       </TabPanel>
-      <TabPanel value={value} index={2} dir={theme.direction}>
-        Item Three
-      </TabPanel>
+
+      <TabPanel value={value} index={2}></TabPanel>
     </Box>
   );
 }
@@ -139,9 +153,6 @@ const Header = () => {
           </Typography>
         </Box>
         <Box gap={2}>
-          {/* <IconButton color="inherit">
-            <ReplayIcon />
-          </IconButton> */}
           <IconButton
             onClick={() => dispatch({ type: "CLOSE_NOTIFICATION_DRAWER" })}
             color="inherit"
@@ -160,10 +171,6 @@ const drawerContent = () => {
   return (
     <>
       {/* Header */}
-      <Box>
-        <Header />
-        <Divider />
-      </Box>
       <Box>
         <FullWidthTabs />
       </Box>

@@ -26,6 +26,7 @@ import { useTheme } from "@mui/material";
 import British from "../svg/flags/British";
 import French from "../svg/flags/French";
 import UAE from "../svg/flags/UAE";
+import { currentNotifications } from "../data";
 
 const styles = {
   overlay: {
@@ -379,7 +380,10 @@ const TopBar = () => {
                     }
                     color="inherit"
                   >
-                    <Badge badgeContent={4} color="error">
+                    <Badge
+                      badgeContent={currentNotifications.length}
+                      color="error"
+                    >
                       <NotificationsIcon />
                     </Badge>
                   </IconButton>

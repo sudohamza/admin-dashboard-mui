@@ -46,12 +46,19 @@ const global = {
     MuiButton: {
       styleOverrides: {
         root: {
-          color: "#fff",
           borderRadius: "10px",
           textTransform: "none",
           boxShadow: "none",
         },
       },
+      variants: [
+        {
+          props: { variant: "contained", color: "primary" },
+          style: {
+            color: "#fff",
+          },
+        },
+      ],
     },
   },
 };
