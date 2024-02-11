@@ -1,9 +1,19 @@
-import { Button, Grid, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Paper,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { Suspense, useState } from "react";
 import HeroSvg from "../svg/HeroSvg";
 import ImageSlider from "../components/ImageSlider";
 import InfoLet from "../components/InfoLet";
 import { infoLetData } from "../data";
+import RadialChart from "../components/PiChart";
+import LineChart from "../components/LineChart";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -63,6 +73,21 @@ const Dashboard = () => {
             </Grid>
           );
         })}
+      </Grid>
+      <Grid mt={1} spacing={2} container>
+        <Grid xs={12} sm={12} md={4} item>
+          <Paper sx={{ p: 2 }} elevation={0}>
+            <Stack>
+              <Typography fontWeight="bold" variant="h5" color="text.secondary">
+                Sale By Gender
+              </Typography>
+              <RadialChart />
+            </Stack>
+          </Paper>
+        </Grid>
+        <Grid xs={12} md={8} item>
+          <LineChart />
+        </Grid>
       </Grid>
     </Suspense>
   );

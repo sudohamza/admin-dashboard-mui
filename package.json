@@ -35,6 +35,8 @@
     "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
-    "@react-icons/all-files": "^4.1.0"
+    "@react-icons/all-files": "^4.1.0",
+    "apexcharts": "^3.45.2",
+    "react-apexcharts": "^1.4.1"
   }
 }
