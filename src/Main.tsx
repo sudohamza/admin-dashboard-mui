@@ -7,6 +7,7 @@ import SettingsDrawer from "./components/SettingsDrawer";
 import LinearLoading from "./components/LinearLoading";
 import { lazy } from "react";
 import NotificationDrawer from "./components/NotificationDrawer";
+import WarnDialog from "./components/WarnDialog";
 let delay = 1000;
 const LazyDashboard = lazy(async () => {
   await new Promise((resolve) => setTimeout(resolve, delay));
@@ -28,6 +29,7 @@ const Main = () => {
   return (
     <>
       <Suspense fallback={<LinearLoading />}>
+        <WarnDialog />
         <NotificationDrawer />
         <Sidebar />
         <SettingsDrawer />
@@ -36,9 +38,8 @@ const Main = () => {
           <Box sx={styles.contentContainer}>
             <Routes>
               <Route path="/" Component={LazyDashboard} />
-              <Route path="/commerce" Component={LazyDashboard} />
-
-              <Route path="*" element={<Box>404 Page Not Found</Box>} />
+              <Route path="/commerce" element={<div>Commerce</div>} />
+              <Route path="*" element={<Box>404</Box>} />
             </Routes>
           </Box>
         </Box>

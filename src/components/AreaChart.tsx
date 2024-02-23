@@ -4,7 +4,7 @@ import { ApexOptions } from "apexcharts";
 import { Paper, Stack, Typography, useTheme } from "@mui/material";
 interface MyComponentProps {}
 
-const LineChart: React.FC<MyComponentProps> = () => {
+const AreaChart: React.FC<MyComponentProps> = () => {
   const theme = useTheme();
   const state: ApexOptions = {
     chart: {
@@ -58,6 +58,9 @@ const LineChart: React.FC<MyComponentProps> = () => {
         useSeriesColors: false,
       },
     },
+    tooltip: {
+      theme: theme.palette.mode,
+    },
   };
 
   return (
@@ -87,4 +90,4 @@ const LineChart: React.FC<MyComponentProps> = () => {
   );
 };
 
-export default LineChart;
+export default AreaChart;

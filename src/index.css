@@ -1,0 +1,6 @@
+.apexcharts-tooltip-active {
+  background-color: red !important;
+}
+.apexcharts-tooltip.light {
+  background-color: green !important;
+}

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Grow from "@mui/material/Grow";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -16,17 +16,19 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import SearchIcon from "@mui/icons-material/Search";
 import QrCodeIcon from "@mui/icons-material/QrCode";
-import LanguageIcon from "@mui/icons-material/Language";
 import SettingsIcon from "@mui/icons-material/Settings";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import MenuIcon from "@mui/icons-material/Menu";
 import { UIContext } from "../context/ui";
-import { useTheme } from "@mui/material";
+import { InputBase, useTheme } from "@mui/material";
 import British from "../svg/flags/British";
 import French from "../svg/flags/French";
 import UAE from "../svg/flags/UAE";
 import { currentNotifications } from "../data";
+import Dialog from "@mui/material/Dialog";
+import { products } from "../data";
+import { Product } from "../utils/types";
 
 const styles = {
   overlay: {
@@ -65,6 +67,25 @@ const styles = {
     position: "relative",
     borderRadius: "10px",
     mr: { xs: "85px", lg: "85px" },
+  },
+  searchContainer: {
+    backgroundColor: "background.default",
+    height: "400px",
+    overflowX: "hidden",
+    overflow: "auto",
+    "&::-webkit-scrollbar": {
+      width: "0.4em",
+      transition: "backgroundColor 2s",
+      WebkitTransition: "background 2s",
+    },
+    "&:hover::-webkit-scrollbar": {},
+    "&::-webkit-scrollbar-thumb": {
+      borderRadius: "10px",
+    },
+    "&:hover::-webkit-scrollbar-thumb": {
+      transition: "backgroundColor 3s",
+      backgroundColor: "text.primary",
+    },
   },
 };
 
@@ -158,7 +179,6 @@ const LanguageMenu = () => {
 };
 
 const ContactMenu = () => {
-  const { dispatch } = useContext(UIContext);
   const contacts = [
     {
       id: 1,
@@ -332,8 +352,38 @@ const UserProfileMenu = () => {
   );
 };
 
+const ProductTile = ({ img, title, type }: Product) => {
+  return (
+    <Stack>
+      <Box p={1} gap={2} sx={{ display: "flex", alignItems: "center" }}>
+        <img style={{ borderRadius: "10px" }} width={60} src={img} alt="" />
+        <Box>
+          <Typography>{title}</Typography>
+          <Typography variant="caption">{type}</Typography>
+        </Box>
+      </Box>
+      <Divider />
+    </Stack>
+  );
+};
+
 const TopBar = () => {
   const { dispatch, state } = useContext(UIContext);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  window.addEventListener("keyup", function (event) {
+    if (event.key === "/") {
+      setOpen(true);
+    }
+  });
   return (
     <AppBar elevation={0} sx={{ pl: { lg: "260px" } }} position="fixed">
       <Box>
@@ -359,7 +409,7 @@ const TopBar = () => {
                   <MenuIcon fontSize="inherit" />
                 </IconButton>
                 <IconButton color="inherit">
-                  <SearchIcon fontSize="inherit" />
+                  <SearchIcon onClick={handleClickOpen} fontSize="inherit" />
                 </IconButton>
                 <Paper
                   variant="outlined"
@@ -402,6 +452,48 @@ const TopBar = () => {
           </Stack>
         </Box>
       </Box>
+      {/* Search Dialog Box */}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        sx={{
+          "& .MuiDialog-paper": {},
+        }}
+      >
+        <Paper elevation={0}>
+          <Stack px={3} py={2}>
+            <Box
+              mx="auto"
+              gap={2}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <SearchIcon />
+              <InputBase autoFocus placeholder="Search..."></InputBase>
+              <Paper
+                variant="outlined"
+                sx={{
+                  fontSize: 12,
+                  display: "flex",
+                  px: 1,
+                  py: 0.5,
+                }}
+              >
+                Esc
+              </Paper>
+            </Box>
+          </Stack>
+          <Divider />
+          <Box sx={styles.searchContainer}>
+            {products.map((item) => (
+              <ProductTile key={item.id} {...item} />
+            ))}
+          </Box>
+        </Paper>
+      </Dialog>
     </AppBar>
   );
 };

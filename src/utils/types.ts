@@ -52,3 +52,11 @@ export type PresetButtonProps = {
   name: ThemeName;
   color: MuiThemeColor;
 };
+
+export type Product = {
+  id: number;
+  img: string;
+  type: string;
+  title: string;
+  details: string;
+};

@@ -13,7 +13,7 @@ import ImageSlider from "../components/ImageSlider";
 import InfoLet from "../components/InfoLet";
 import { infoLetData } from "../data";
 import RadialChart from "../components/PiChart";
-import LineChart from "../components/LineChart";
+import AreaChart from "../components/AreaChart";
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -86,7 +86,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid xs={12} md={8} item>
-          <LineChart />
+          <AreaChart />
         </Grid>
       </Grid>
     </Suspense>
