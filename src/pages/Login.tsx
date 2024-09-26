@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import LinearLoading from "../components/LinearLoading";
 import SvgLogo from "../svg/SvgLogo";
+import loginImage from "../assets/login-picture.png";
 
 let email = "demo@example.com";
 let password = "demo1234";
@@ -79,7 +80,7 @@ const Login = () => {
               component="img"
               py={4}
               textAlign="center"
-              src="https://minimals.cc/assets/illustrations/illustration_dashboard.png"
+              src={loginImage}
             ></Box>
           </Box>
 
